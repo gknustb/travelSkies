@@ -2,7 +2,6 @@ package com.gknust;
 
 public class Trip {
 
-    //todo:  after defining business rules, validate date logic when setting
     private int tripID;
     private User user;
     private int locationID;
@@ -11,12 +10,16 @@ public class Trip {
     private String name;
 
 
-    public Trip(int tripID, User user, int locationID, long startDate, long endDate, String name) {
+    public Trip(int tripID, User user, int locationID, long startDate, long endDate, String name) throws IllegalArgumentException{
+        if(startDate<endDate) {
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }else
+            throw new IllegalArgumentException("Start date cannot be later than end date.");
+
         this.tripID = tripID;
         this.user = user;
         this.locationID = locationID;
-        this.startDate = startDate;
-        this.endDate = endDate;
         this.name = name;
     }
 
@@ -48,16 +51,22 @@ public class Trip {
         return startDate;
     }
 
-    public void setStartDate(long startDate) {
-        this.startDate = startDate;
+    public void setStartDate(long startDate) throws IllegalArgumentException{
+        if(startDate<endDate)
+            this.startDate = startDate;
+        else
+            throw new IllegalArgumentException("Start date cannot be later than end date.");
     }
 
     public long getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(long endDate) {
-        this.endDate = endDate;
+    public void setEndDate(long endDate) throws IllegalArgumentException{
+        if(startDate<endDate)
+            this.endDate = endDate;
+        else
+            throw new IllegalArgumentException("End date cannot be earlier than start date.");
     }
 
     public String getName() {

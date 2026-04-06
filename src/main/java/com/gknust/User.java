@@ -12,6 +12,9 @@ public class User {
         this.username = username;
     }
 
+    public void addTrip(Trip trip){
+        trips.add(trip);
+    }
     public int getUserID() {
         return userID;
     }
@@ -19,6 +22,4 @@ public class User {
     public void setUserID(int userID) {   //todo: add method to add trip to list and to return the list (or a copy of it)
         this.userID = userID;
     }
-
-    //todo: add method to add trip to list and to return the list (or a copy of it)
 }
