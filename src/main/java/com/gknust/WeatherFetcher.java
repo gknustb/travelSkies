@@ -4,11 +4,9 @@ import com.google.gson.*;
 
 import java.net.URI;
 import java.net.http.*;
+import java.time.Duration;
 
-/**
- * fetchWeather
- */
-public class Weather {
+public class WeatherFetcher {
   private static final HttpClient client = HttpClient.newHttpClient();
   private static final Gson gson = new Gson();
 
@@ -17,7 +15,7 @@ public class Weather {
   private final String[] day;
 
 
-  public Weather(double latitude, double longitude, String day){
+  public WeatherFetcher(double latitude, double longitude, String day){
     this.latitude = new double[] { latitude };
     this.longitude = new double[] { longitude };
     this.day = new String[] { day };
@@ -47,6 +45,7 @@ public class Weather {
         .uri(URI.create("https://api.open-meteo.com/v1/forecast"))
         .POST(requestQuery)
         .setHeader("Content-Type", "application/json")
+        .timeout(Duration.ofSeconds(20))
         .build();
 
     //todo: handle bad responses

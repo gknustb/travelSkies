@@ -14,6 +14,7 @@ undo/
 .project
 .settings/
 .env
+*.properties
 
 *.log
 .DS_Store
