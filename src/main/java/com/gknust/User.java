@@ -8,17 +8,18 @@ public class User {
     private String username;
     private List<Trip> trips = new ArrayList<>();
 
-    public User(String username) {
+    public User(int userID, String username) {
+        this.userID = userID;
         this.username = username;
     }
 
     public void addTrip(Trip trip){
         trips.add(trip);
     }
+
     public int getUserID() {
         return userID;
     }
-
     public void setUserID(int userID) {   //todo: add method to add trip to list and to return the list (or a copy of it)
         this.userID = userID;
     }
