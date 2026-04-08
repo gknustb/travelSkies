@@ -9,7 +9,6 @@ public class User {
     private List<Trip> trips = new ArrayList<>();
 
     public User(int userID, String username) {
-        this.userID = userID;
         this.username = username;
     }
 
@@ -20,7 +19,15 @@ public class User {
     public int getUserID() {
         return userID;
     }
-    public void setUserID(int userID) {   //todo: add method to add trip to list and to return the list (or a copy of it)
+    public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

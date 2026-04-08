@@ -1,29 +1,14 @@
 package com.gknust;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements AutoCloseable {
-    private Connection connection;
+public class UserDAO {
+    private final Connection connection;
 
-    public void close() throws SQLException{
-        try{
-            this.connection.close();
-        }catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public UserDAO(){
-        try{
-            this.connection= DatabaseHandler.getConnection();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
+    public UserDAO(Connection connection){
+        this.connection = connection;
     }
 
     public List<User> listUsers(){
@@ -41,5 +26,21 @@ public class UserDAO implements AutoCloseable {
             throw new RuntimeException(e);
         }
         return users;
+    }
+
+    public void insertUser(User user){
+        String sql = "INSERT INTO User (username) VALUES (?)";
+        try(PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            stmt.setString(1, user.getUsername());
+            stmt.executeUpdate();
+            try(ResultSet result= stmt.getGeneratedKeys()) {
+                if (result.next()) {
+                    int generatedKey = result.getInt(1);
+                    user.setUserID(generatedKey);
+                }
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
