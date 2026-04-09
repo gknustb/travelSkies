@@ -43,4 +43,49 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void updateUser(User user){
+        String sql = "UPDATE User SET username = ? WHERE userID = ?";
+        int userID = user.getUserID();
+        String username = user.getUsername();
+        try(PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setString(1, username);
+            stmt.setInt(2, userID);
+            stmt.executeUpdate();
+        }catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteUserById(int userID){
+        String sql = "DELETE FROM User WHERE userID = ?";
+        try(PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setInt(1, userID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public User findUserById(int userID){
+        String sql = "SELECT * FROM User WHERE userID = ?";
+        try(PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setInt(1, userID);
+
+            try(ResultSet result = stmt.executeQuery()){
+                if(result.next()){
+                    int returnedUserID = result.getInt("userID");
+                    String returnedUsername = result.getString("username");
+                    User returnedUser = new User(returnedUserID, returnedUsername);
+                    return returnedUser;
+                }
+                return null;
+            }catch (SQLException e){
+                throw new RuntimeException(e);
+            }
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
