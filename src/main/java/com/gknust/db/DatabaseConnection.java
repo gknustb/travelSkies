@@ -1,4 +1,4 @@
-package com.gknust;
+package com.gknust.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

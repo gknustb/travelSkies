@@ -1,4 +1,4 @@
-package com.gknust;
+package com.gknust.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,11 @@ public class User {
     private List<Trip> trips = new ArrayList<>();
 
     public User(int userID, String username) {
+        this.userID = userID;
+        this.username = username;
+    }
+
+    public User(String username){
         this.username = username;
     }
 

@@ -1,4 +1,4 @@
-package com.gknust;
+package com.gknust.model;
 
 import java.util.ArrayList;
 import java.util.List;

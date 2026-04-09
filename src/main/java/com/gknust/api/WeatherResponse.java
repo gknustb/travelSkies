@@ -1,4 +1,4 @@
-package com.gknust;
+package com.gknust.api;
 
 public record WeatherResponse(
     double latitude,

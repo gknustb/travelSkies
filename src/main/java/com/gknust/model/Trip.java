@@ -1,4 +1,4 @@
-package com.gknust;
+package com.gknust.model;
 
 public class Trip {
 

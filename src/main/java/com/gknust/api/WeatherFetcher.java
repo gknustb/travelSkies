@@ -1,4 +1,4 @@
-package com.gknust;
+package com.gknust.api;
 
 import com.google.gson.*;
 

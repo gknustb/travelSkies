@@ -1,4 +1,6 @@
-package com.gknust;
+package com.gknust.db.dao;
+
+import com.gknust.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
