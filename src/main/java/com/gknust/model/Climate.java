@@ -6,13 +6,15 @@ public class Climate {
     private float maxTemp;
     private float minTemp;
     private int climateCode;
+    private int precipitationChance;
 
-    public Climate(long date, Location location, float maxTemp, float minTemp, int climateCode) {
+    public Climate(long date, Location location, float maxTemp, float minTemp, int climateCode, int precipitationChance) {
         this.date = date;
         this.location = location;
         this.maxTemp = maxTemp;
         this.minTemp = minTemp;
         this.climateCode = climateCode;
+        this.precipitationChance = precipitationChance;
     }
 
     public long getDate() {
@@ -53,5 +55,13 @@ public class Climate {
 
     public void setClimateCode(int climateCode) {
         this.climateCode = climateCode;
+    }
+
+    public int getPrecipitationChance() {
+        return precipitationChance;
+    }
+
+    public void setPrecipitationChance(int precipitationChance) {
+        this.precipitationChance = precipitationChance;
     }
 }

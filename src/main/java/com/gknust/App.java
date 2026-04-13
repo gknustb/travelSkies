@@ -26,12 +26,21 @@ public class App {
             schema.initDatabase();
 
             User test1 = new User("testuser");
-            Location testlocation = new Location()
+            Location testlocation = new Location(-15.799612655608906, -47.86418960896907, 0L, "Brasilia");
 
             UserDAO userdao = new UserDAO(dbConnection);
+            LocationDAO locationdao = new LocationDAO(dbConnection);
+
             userdao.insertUser(test1);
+            locationdao.insertLocation(testlocation);
+
             for(User user : userdao.listUsers()){
                 System.out.printf("\n%d | %s", user.getUserID(), user.getUsername());
+            }
+            testlocation.setDisplayName("DF");
+            locationdao.updateLocation(testlocation);
+            for(Location location : locationdao.listLocations()){
+                System.out.printf("\n%g | %s", location.getLatitude(), location.getDisplayName());
             }
         }catch (Exception e) {
             e.printStackTrace();
