@@ -2,8 +2,9 @@ package com.gknust.db;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseSchema {
     private final Connection connection;
@@ -25,13 +26,38 @@ public class DatabaseSchema {
             byte[] sqlStringBytes = sqlInputStream.readAllBytes();
             String sql = new String(sqlStringBytes, StandardCharsets.UTF_8);
 
-            try(Statement stmt = connection.createStatement()){
+            try (Statement stmt = connection.createStatement()){
                 stmt.executeUpdate(sql);
             }catch (java.sql.SQLException e) {
                throw new RuntimeException(e);
             }
 
         }catch (java.io.IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void dropDatabase(){
+        String sqlSelect = "SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%'";
+
+        try(Statement stmt = connection.createStatement();
+            ResultSet selectedNames = stmt.executeQuery(sqlSelect)){
+            List<String> tableNames = new ArrayList<>();
+
+            while(selectedNames.next()){
+                tableNames.add(selectedNames.getString("name"));
+            }
+
+            stmt.executeUpdate("PRAGMA foreign_keys = OFF");
+
+            for (String name : tableNames){
+                String sqlDrop = ("DROP TABLE " + name);
+                stmt.executeUpdate(sqlDrop);
+            }
+
+            stmt.executeUpdate("PRAGMA foreign_keys = ON");
+
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

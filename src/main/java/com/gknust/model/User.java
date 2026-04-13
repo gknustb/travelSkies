@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private int userID;
+    private int userID = 0;
     private String username;
     private List<Trip> trips = new ArrayList<>();
 

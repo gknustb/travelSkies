@@ -21,9 +21,12 @@ public class App {
 //        }
         try(Connection dbConnection = DatabaseConnection.getConnection()){
             DatabaseSchema schema = new DatabaseSchema(dbConnection);
+
+            schema.dropDatabase();
             schema.initDatabase();
 
             User test1 = new User("testuser");
+            Location testlocation = new Location()
 
             UserDAO userdao = new UserDAO(dbConnection);
             userdao.insertUser(test1);

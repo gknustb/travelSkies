@@ -4,13 +4,13 @@ public class Trip {
 
     private int tripID;
     private User user;
-    private int locationID;
+    private Location location;
     private long startDate;
     private long endDate;
     private String name;
 
 
-    public Trip(int tripID, User user, int locationID, long startDate, long endDate, String name) throws IllegalArgumentException{
+    public Trip(int tripID, User user, Location location, long startDate, long endDate, String name) throws IllegalArgumentException{
         if(startDate<endDate) {
             this.startDate = startDate;
             this.endDate = endDate;
@@ -19,7 +19,7 @@ public class Trip {
 
         this.tripID = tripID;
         this.user = user;
-        this.locationID = locationID;
+        this.location = location;
         this.name = name;
     }
 
@@ -39,12 +39,12 @@ public class Trip {
         this.user = user;
     }
 
-    public int getLocationID() {
-        return locationID;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationID(int locationID) {
-        this.locationID = locationID;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public long getStartDate() {

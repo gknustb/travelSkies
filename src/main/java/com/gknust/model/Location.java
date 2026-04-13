@@ -19,6 +19,13 @@ public class Location {
         this.displayName = displayName;
     }
 
+    public Location(double latitude, double longitude, long lastUpdate, String displayName) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.lastUpdate = lastUpdate;
+        this.displayName = displayName;
+    }
+
     public void addClimate(Climate climate){
         this.climateList.add(climate);
     }
