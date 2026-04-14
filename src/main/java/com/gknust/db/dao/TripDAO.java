@@ -26,7 +26,7 @@ public class TripDAO {
         try(PreparedStatement stmt = connection.prepareStatement(sql)){
 
             //if user does not have an ID initialized yet
-            if(user.getUserID() == 0) return returnedTrips;
+            if(user == null || user.getUserID() == 0) return returnedTrips;
 
             stmt.setInt(1, user.getUserID());
             try(ResultSet selectedTrips = stmt.executeQuery()){
