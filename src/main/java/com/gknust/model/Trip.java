@@ -11,13 +11,25 @@ public class Trip {
 
 
     public Trip(int tripID, User user, Location location, long startDate, long endDate, String name) throws IllegalArgumentException{
-        if(startDate<endDate) {
+        if(startDate<=endDate) {
             this.startDate = startDate;
             this.endDate = endDate;
         }else
             throw new IllegalArgumentException("Start date cannot be later than end date.");
 
         this.tripID = tripID;
+        this.user = user;
+        this.location = location;
+        this.name = name;
+    }
+
+    public Trip(User user, Location location, long startDate, long endDate, String name) throws IllegalArgumentException{
+        if(startDate<=endDate) {
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }else
+            throw new IllegalArgumentException("Start date cannot be later than end date.");
+
         this.user = user;
         this.location = location;
         this.name = name;

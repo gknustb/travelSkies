@@ -23,7 +23,7 @@ public class WeatherFetcher {
 
   public WeatherResponse getWeather () throws WeatherException{
 
-    WeatherQuery query = new WeatherQuery(latitude, longitude, day);
+    WeatherQuery query = new WeatherQuery(latitude[0], longitude[0], day[0]);
     String jsonResponse = null;
 
     try {

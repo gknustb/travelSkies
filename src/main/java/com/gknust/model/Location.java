@@ -9,7 +9,6 @@ public class Location {
     private double longitude;
     private long lastUpdate;
     private String displayName;
-    private List<Climate> climateList= new ArrayList<>();
 
     public Location(int locationID, double latitude, double longitude, long lastUpdate, String displayName) {
         this.locationID = locationID;
@@ -24,10 +23,6 @@ public class Location {
         this.longitude = longitude;
         this.lastUpdate = lastUpdate;
         this.displayName = displayName;
-    }
-
-    public void addClimate(Climate climate){
-        this.climateList.add(climate);
     }
 
     public int getLocationID() {

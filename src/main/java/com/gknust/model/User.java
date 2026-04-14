@@ -6,7 +6,6 @@ import java.util.List;
 public class User {
     private int userID = 0;
     private String username;
-    private List<Trip> trips = new ArrayList<>();
 
     public User(int userID, String username) {
         this.userID = userID;
@@ -15,10 +14,6 @@ public class User {
 
     public User(String username){
         this.username = username;
-    }
-
-    public void addTrip(Trip trip){
-        trips.add(trip);
     }
 
     public int getUserID() {

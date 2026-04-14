@@ -12,8 +12,7 @@ public record WeatherResponse(
 
     Daily daily
 
-) {
-}
+) {}
 
 record Daily(
         String[] time,
