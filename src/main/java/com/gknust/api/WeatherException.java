@@ -1,4 +1,4 @@
-package com.gknust;
+package com.gknust.api;
 
 public class WeatherException extends Exception{
     public WeatherException(String message){

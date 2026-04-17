@@ -1,6 +1,4 @@
-package com.gknust;
-
-import com.google.gson.JsonObject;
+package com.gknust.api;
 
 public record WeatherResponse(
     double latitude,
@@ -12,12 +10,11 @@ public record WeatherResponse(
     String timezone,
     String elevation,
 
-    daily daily
+    Daily daily
 
-) {
-}
+) {}
 
-record daily(
+record Daily(
         String[] time,
         double[] temperature_2m_mean
 ){}
