@@ -16,6 +16,8 @@ public class App {
         //todo: create controller layer for each data object for proper encapsulation
         //todo: unit tests
         //todo: UI layer
+        //todo: proper logging
+        //todo(maybe): connection pool implementation
 
         try(Connection dbConnection = DatabaseConnection.getConnection()){
             DatabaseSchema schema = new DatabaseSchema(dbConnection);
