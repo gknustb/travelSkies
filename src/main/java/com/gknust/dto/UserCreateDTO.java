@@ -1,6 +1,6 @@
 package com.gknust.dto;
 
-public record UserDTO(
+public record UserCreateDTO(
         String username
 ) {
 }

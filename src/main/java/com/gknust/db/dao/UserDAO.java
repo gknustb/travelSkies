@@ -90,4 +90,25 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
     }
+    public User findUserByUsername(String username){
+        String sql = "SELECT * FROM User WHERE username = ?";
+        try(PreparedStatement stmt = connection.prepareStatement(sql)){
+            stmt.setString(1, username);
+
+            try(ResultSet result = stmt.executeQuery()){
+                if(result.next()){
+                    int returnedUserID = result.getInt("userID");
+                    String returnedUsername = result.getString("username");
+                    User returnedUser = new User(returnedUserID, returnedUsername);
+                    return returnedUser;
+                }
+                return null;
+            }catch (SQLException e){
+                throw new RuntimeException(e);
+            }
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

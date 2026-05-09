@@ -1,6 +1,7 @@
 package com.gknust.dto;
 
-public record TripDTO(
+public record TripResponseDTO(
+        int tripID,
         int userID,
         int locationID,
         long startDate,

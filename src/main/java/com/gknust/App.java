@@ -2,7 +2,13 @@ package com.gknust;
 import com.gknust.db.*;
 import com.gknust.db.dao.*;
 import com.gknust.api.*;
+import com.gknust.dto.LocationCreateDTO;
+import com.gknust.dto.TripCreateDTO;
+import com.gknust.dto.UserCreateDTO;
 import com.gknust.model.*;
+import com.gknust.service.LocationService;
+import com.gknust.service.TripService;
+import com.gknust.service.UserService;
 import com.gknust.util.DateMath;
 
 import java.sql.Connection;
@@ -31,39 +37,18 @@ public class App {
             TripDAO tripdao= daoFactory.initTripDAO();
             ClimateDAO climatedao= daoFactory.initClimateDAO();
 
+            UserService userService = new UserService(userdao);
+            LocationService locationService = new LocationService(locationdao);
+            TripService tripService = new TripService(tripdao, locationService, userService);
 
-            User test1 = new User("testuser");
-            userdao.insertUser(test1);
+            UserCreateDTO newUser = new UserCreateDTO("test");
+            userService.createUser(newUser);
 
-            Location testlocation = new Location(-15.799612655608906, -47.86418960896907, 0L, "Brasilia");
-            locationdao.insertLocation(testlocation);
+            LocationCreateDTO newLocation = new LocationCreateDTO(-15.799661839592979, -47.864177046134174, "testloc");
+            TripCreateDTO newTrip = new TripCreateDTO(userService.findUserByUsername("test").userID(), newLocation, 10230230, 91234180, "testtrip");
+            tripService.createTrip(newTrip);
 
-            String dateString = "2026-04-17";
-            long unixTime = DateMath.DateToUnix(dateString);
-            System.out.println(DateMath.UnixToDate(unixTime));
-            Trip testTrip = new Trip(test1, testlocation, unixTime, unixTime, "test trip");
-            tripdao.insertTrip(testTrip);
 
-            Climate testClimate = new Climate(unixTime, testlocation, 30.2F, 20.3F, 20, 12);
-            climatedao.insertClimate(testClimate);
-
-            for(User user : userdao.listUsers()){
-                System.out.printf("\n%d | %s", user.getUserID(), user.getUsername());
-            }
-
-            testlocation.setDisplayName("DF");
-            locationdao.updateLocation(testlocation);
-            for(Location location : locationdao.listLocations()){
-                System.out.printf("\n%g | %s", location.getLatitude(), location.getDisplayName());
-            }
-
-            for(Trip trip : tripdao.listTripsByUser(test1)){
-                System.out.printf("\n%d | %s", trip.getTripID(), trip.getName());
-            }
-
-            for(Climate climate : climatedao.listClimatesByLocation(testlocation)){
-                System.out.printf("\n%d | %f", climate.getDate(), climate.getMaxTemp());
-            }
         }catch (Exception e) {
             e.printStackTrace();
         }
