@@ -1,4 +1,5 @@
 package com.gknust;
+import com.gknust.control.Server;
 import com.gknust.db.*;
 import com.gknust.db.dao.*;
 import com.gknust.api.*;
@@ -27,7 +28,8 @@ public class App {
 
         try(Connection dbConnection = DatabaseConnection.getConnection()){
             DatabaseSchema schema = new DatabaseSchema(dbConnection);
-
+            Server server = new Server();
+            server.startServer();
             schema.dropDatabase();
             schema.initDatabase();
 
