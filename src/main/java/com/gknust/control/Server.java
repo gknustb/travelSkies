@@ -1,5 +1,6 @@
 package com.gknust.control;
 
+import com.gknust.api.TravelApiServlet;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.servlets.DefaultServlet;
@@ -23,6 +24,9 @@ public class Server {
             Context context = server.addContext("", staticFiles);
             server.addServlet(context, "default", new DefaultServlet());
             context.addServletMappingDecoded("/", "default");
+
+            server.addServlet(context, "travelApi", new TravelApiServlet());
+            context.addServletMappingDecoded("/travel/save", "travelApi");
             server.start();
             System.out.println("Server started at http://localhost:"+port+"!");
             server.getServer().await();
