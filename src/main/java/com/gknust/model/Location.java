@@ -25,6 +25,19 @@ public class Location {
         this.displayName = displayName;
     }
 
+    public Location(double latitude, double longitude, String displayName) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.lastUpdate = 0;
+        this.displayName = displayName;
+    }
+    public Location(int locationID, double latitude, double longitude, String displayName) {
+        this.locationID = locationID;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.lastUpdate = 0;
+        this.displayName = displayName;
+    }
     public int getLocationID() {
         return locationID;
     }

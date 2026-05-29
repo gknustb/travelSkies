@@ -1,5 +1,6 @@
 target/
 bin/
+temp/
 
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]
