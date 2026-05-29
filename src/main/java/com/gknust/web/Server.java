@@ -1,6 +1,5 @@
-package com.gknust.control;
+package com.gknust.web;
 
-import com.gknust.api.TravelApiServlet;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.servlets.DefaultServlet;

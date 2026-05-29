@@ -1,19 +1,16 @@
 package com.gknust;
-import com.gknust.control.Server;
+import com.gknust.web.Server;
 import com.gknust.db.*;
 import com.gknust.db.dao.*;
-import com.gknust.api.*;
 import com.gknust.dto.LocationCreateDTO;
 import com.gknust.dto.TripCreateDTO;
 import com.gknust.dto.UserCreateDTO;
-import com.gknust.model.*;
 import com.gknust.service.LocationService;
 import com.gknust.service.TripService;
 import com.gknust.service.UserService;
-import com.gknust.util.DateMath;
+import com.gknust.web.adapter.TripAdapter;
 
 import java.sql.Connection;
-import java.time.*;
 
 public class App {
     public static void main(String[] args) {
@@ -33,16 +30,22 @@ public class App {
             schema.dropDatabase();
             schema.initDatabase();
 
+            //DAOs
             DaoFactory daoFactory = new DaoFactory(dbConnection);
             UserDAO userdao= daoFactory.initUserDAO();
             LocationDAO locationdao= daoFactory.initLocationDAO();
             TripDAO tripdao= daoFactory.initTripDAO();
             ClimateDAO climatedao= daoFactory.initClimateDAO();
 
+            //Services
             UserService userService = new UserService(userdao);
             LocationService locationService = new LocationService(locationdao);
             TripService tripService = new TripService(tripdao, locationService, userService);
 
+            //WebAdapters
+            TripAdapter tripAdapter = new TripAdapter(tripService);
+
+            //test operations
             UserCreateDTO newUser = new UserCreateDTO("test");
             userService.createUser(newUser);
 

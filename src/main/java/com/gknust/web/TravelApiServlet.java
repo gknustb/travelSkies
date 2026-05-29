@@ -1,6 +1,5 @@
-package com.gknust.api;
+package com.gknust.web;
 
-import com.gknust.dto.TripCreateDTO;
 import com.google.gson.Gson;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,9 +12,7 @@ public class TravelApiServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //TripCreateDTO trip = gson.fromJson(request.getReader(), TripCreateDTO.class);
-        request.getReader().lines().iterator().forEachRemaining(string -> System.out.println(string));
-        //System.out.println(trip.name());
+//        request.getReader().lines().iterator().forEachRemaining(string -> System.out.println(string));
 
     }
 }
